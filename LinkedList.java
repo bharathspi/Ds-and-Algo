@@ -174,6 +174,23 @@ public void reverseUsingRec(Node head)
   }
   return nthNodeFromEnd.data;
  }
+
+//Printing nth node from last using Recurssion
+public Node nthNodeFromEndRec(Node head,int n,int [] c)
+{
+   if(head==null)
+   	  {
+   	  	return null;
+   	  }
+      Node result=nthNodeFromEndRec(head.next,n,c);
+      c[0]++;
+      if(c[0]==n)
+      {
+      	result = head;
+      }
+
+      return result;  
+}
 public void print(LinkedList list)
 {
 	Node temp =  list.head;
@@ -233,8 +250,12 @@ public static void main(String []  args)
     System.out.println("***Reversing the LinkedList Using Reccursion***");
     list.reverseUsingRec(list.head);
     list.print(list);
-    System.out.println("3 rd node from end usin two Pointer method");
+    System.out.println("3 rd node from end using two Pointer method");
     System.out.println(list.nthNodeFromTheEnd(list,3));
+    System.out.println("2 nd node from end using Reccursion");
+    int []c =  new int[1];
+    Node req = list.nthNodeFromEndRec(list.head,2,c);
+    System.out.println(req.data);
 
 }
              }
