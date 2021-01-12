@@ -1,5 +1,8 @@
 //LEETCODE LINKED LIST MOST ASKED IN INTERVIEWS: https://leetcode.com/explore/interview/card/top-interview-questions-easy/93/linked-list/
-
+//git Commands git init
+//git add .
+//git commit -m "comment here"
+//git push -u origin master
 import java.util.*;
 public class LinkedList
 {
@@ -191,6 +194,46 @@ public Node nthNodeFromEndRec(Node head,int n,int [] c)
 
       return result;  
 }
+
+//merging two sorted Linked lists into list
+public LinkedList merge(LinkedList list1, LinkedList list2)
+{
+	LinkedList merged_list = new LinkedList();
+	Node temp1 = list1.head;
+	Node temp2 = list2.head;
+	while(temp1!=null&&temp2!=null)
+	{
+		if(temp1.data<temp2.data)
+			{
+				merged_list=merged_list.insertLast(merged_list,temp1.data);
+				temp1=temp1.next;
+		    }
+		else
+		{
+			merged_list=merged_list.insertLast(merged_list,temp2.data);
+			temp2=temp2.next;
+
+		}
+	}
+	if(temp1==null)
+	{
+		while(temp2!=null)
+		{
+			merged_list=merged_list.insertLast(merged_list,temp2.data);
+			temp2=temp2.next;
+		}
+	}
+	else
+	{
+		while(temp1!=null)
+		{
+			merged_list=merged_list.insertLast(merged_list,temp1.data);
+			temp1=temp1.next;
+		}
+	}
+	return merged_list;
+}
+
 public void print(LinkedList list)
 {
 	Node temp =  list.head;
@@ -218,15 +261,15 @@ public void printReverseUsingRec(Node head)
 public static void main(String []  args)
 {
    LinkedList list =  new LinkedList();
-    System.out.println("***Inserted 1 to 6 to the end of LinkedList***");
+   // System.out.println("***Inserted 1 to 6 to the end of LinkedList***");
     list=list.insertLast(list,1);
-    list=list.insertLast(list,2);
     list=list.insertLast(list,3);
-    list=list.insertLast(list,4);
     list=list.insertLast(list,5);
-    list=list.insertLast(list,6);
+    list=list.insertLast(list,7);
+    list=list.insertLast(list,9);
+    list=list.insertLast(list,11);
     list.print(list);
-    System.out.println("***Inserted 0 in the beginning***");
+    /*System.out.println("***Inserted 0 in the beginning***");
     list=list.insertFirst(list,0);
     list.print(list);
     System.out.println("***deleted the first element***");
@@ -255,9 +298,20 @@ public static void main(String []  args)
     System.out.println("2 nd node from end using Reccursion");
     int []c =  new int[1];
     Node req = list.nthNodeFromEndRec(list.head,2,c);
-    System.out.println(req.data);
+    System.out.println(req.data);*/
+    LinkedList list1 =  new LinkedList();
+     list1=list1.insertLast(list1,2);
+     list1=list1.insertLast(list1,4);
+     list1=list1.insertLast(list1,6);
+     list1.insertLast(list1,8);
+     list1=list1.insertLast(list1,10);
+     list1=list1.insertLast(list1,12);
+     list1.print(list1);
+     System.out.println("Merging 1->3->5->7->9->11 and 2->4->6->8->10->12");
+    LinkedList sorted_list=list1.merge(list,list1);
+    list1.print(sorted_list);
+
 
 }
              }
-
 
