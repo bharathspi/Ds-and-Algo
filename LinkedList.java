@@ -148,10 +148,10 @@ public LinkedList reverseL(LinkedList list)
 //Reference https://www.youtube.com/watch?v=KYH83T4q6Vs
 //Video link can also be found in liked videos of youtube
 //Revrsing Linked list using Recurssion
-
+//https://www.geeksforgeeks.org/recursively-reversing-a-linked-list-a-simple-implementation/
 public void reverseUsingRec(Node head)
 {
-	if(head.next==null)
+	if(head.next==null||head==null)
 	{
 		this.head=head;
 		return;
@@ -234,9 +234,9 @@ public LinkedList merge(LinkedList list1, LinkedList list2)
 	return merged_list;
 }
 
-public void print(LinkedList list)
+public void print(Node list)
 {
-	Node temp =  list.head;
+	Node temp =  list;
     if(temp==null)
     {
      System.out.println("Empty");
@@ -258,17 +258,31 @@ public void printReverseUsingRec(Node head)
 	System.out.print(head.data+" ");
 
 }
+
+//https://www.youtube.com/watch?v=Cs3KwAsqqn4&t=122s
+//The above video explains why floyd cycle detection algorithm works finding the starting point of the loop.
+	
+//All QUESTIONS THAT YOU DID IN LINKED LISTS ARE THERE IN THE GOOGLE DOC
+
 public static void main(String []  args)
 {
    LinkedList list =  new LinkedList();
    // System.out.println("***Inserted 1 to 6 to the end of LinkedList***");
-    list=list.insertLast(list,1);
-    list=list.insertLast(list,3);
-    list=list.insertLast(list,5);
-    list=list.insertLast(list,7);
+    Scanner obj  = new Scanner(System.in);
+    int size  = obj.nextInt();
+    int k;
+    while(size-->0)
+    {
+    	k= obj.nextInt();
+    	list=list.insertLast(list,k);
+    }
+    
+    //list=list.insertLast(list,4);
+    //list=list.insertLast(list,9);
+    /*list=list.insertLast(list,7);
     list=list.insertLast(list,9);
-    list=list.insertLast(list,11);
-    list.print(list);
+    list=list.insertLast(list,11);*/
+    //list.print(list.head);
     /*System.out.println("***Inserted 0 in the beginning***");
     list=list.insertFirst(list,0);
     list.print(list);
@@ -300,18 +314,97 @@ public static void main(String []  args)
     Node req = list.nthNodeFromEndRec(list.head,2,c);
     System.out.println(req.data);*/
     LinkedList list1 =  new LinkedList();
-     list1=list1.insertLast(list1,2);
+    int size1  = obj.nextInt();
+    while(size1-->0)
+    {
+    	k= obj.nextInt();
+    	list1=list1.insertLast(list1,k);
+    }
+     
+     /*list1=list1.insertLast(list1,6);
      list1=list1.insertLast(list1,4);
-     list1=list1.insertLast(list1,6);
-     list1.insertLast(list1,8);
-     list1=list1.insertLast(list1,10);
-     list1=list1.insertLast(list1,12);
-     list1.print(list1);
-     System.out.println("Merging 1->3->5->7->9->11 and 2->4->6->8->10->12");
+     list1=list1.insertLast(list1,9);*/
+     /*list1=list1.insertLast(list1,10);
+     list1=list1.insertLast(list1,12);*/
+     list1.print(list1.head);
+     /*System.out.println("Merging 1->3->5->7->9->11 and 2->4->6->8->10->12");
     LinkedList sorted_list=list1.merge(list,list1);
-    list1.print(sorted_list);
-
+    list1.print(sorted_list);*/
+    //list1.print(list1.addTwoNumbers(list1.head,list.head));
+    list1.addTwoNumbers(list1.head,list.head);
 
 }
+
+public int reverse(int d)
+{
+	int rev=0;
+	while(d!=0)
+	{
+		int dit = d%10;
+		rev=rev*10+dit;
+		d=d/10;
+
+	}
+	return rev;
+}
+
+
+public Node addTwoNumbers(Node l1, Node l2) {
+        LinkedList l= new LinkedList();
+        Node temp1 = l1;
+        Node temp2  = l2;
+        int sum1=0;
+        int sum2=0;
+        while(temp1!=null)
+        {
+            sum1=sum1*10+temp1.data;
+            temp1=temp1.next;
+        }
+        
+        while(temp2!=null)
+        {
+            sum2=sum2*10+temp2.data;
+            temp2=temp2.next;
+        }
+        int new_sum1=l.reverse(sum1);
+        int new_sum2=l.reverse(sum2);
+        int req_sum=new_sum1+new_sum2;
+        //System.out.println(req_sum);
+        Node req_head = null;
+         System.out.println(new_sum1+" "+new_sum2);
+        if(req_sum==0)
+            return new Node(0);
+        
+            
+        while(req_sum>0)
+        {
+            int digit = req_sum%10;
+            Node new_node = new Node(digit);
+            Node dummy = req_head;
+            if(req_head==null)
+            {
+                req_head = new_node;
+            }
+            else
+            {
+                while(dummy.next!=null)
+                {
+                    dummy = dummy.next;
+                }
+                dummy.next=new_node;
+            }
+                req_sum=req_sum/10; 
+            
+        }
+
+       
+        
+
+        return req_head;
+        
+        
+        
+    }
              }
+
 
