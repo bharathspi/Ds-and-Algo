@@ -576,4 +576,158 @@ public TreeNode LCA(TreeNode root,int n1,int n2)
        //bt.rootToLeafPaths(bt.root,sb,arr);
    System.out.println(bt.LCA(bt.root,2,3).data);
   }
+  /*
+Find the no of full nodes in the binary tree
+
+  static int getfullCount(Node root) 
+{ 
+    if (root == null) 
+    return 0; 
+  
+    int res = 0; 
+    if (root.left != null && root.right != null) 
+    res++; 
+  
+    res += (getfullCount(root.left) + getfullCount(root.right)); 
+    return res; 
+} 
+*/
+/*
+Print the sum of nodes whose grandparents are even valued
+class Solution {
+    int sum;
+    public void answer(TreeNode root ,TreeNode parent,TreeNode grandParent)
+    {
+        if(root==null)
+              return;
+        if(grandParent!=null&&grandParent.val%2==0)
+             this.sum=sum+root.val; ;
+         answer(root.left,root,parent);
+         answer(root.right,root,parent);
+               
+    }
+    public int sumEvenGrandparent(TreeNode root) {
+        answer(root,null,null);
+        return sum;
+    }
+}
+
+
+ private void TopView(Node root)
+    {
+        class QueueObj {
+            Node node;
+            int hd;
+ 
+            QueueObj(Node node, int hd)
+            {
+                this.node = node;
+                this.hd = hd;
+            }
+        }
+        Queue<QueueObj> q = new LinkedList<QueueObj>();
+        Map<Integer, Node> topViewMap
+            = new TreeMap<Integer, Node>();
+ 
+        if (root == null) {
+            return;
+        }
+        else {
+            q.add(new QueueObj(root, 0));
+        }
+ 
+        System.out.println(
+            "The top view of the tree is : ");
+ 
+        // count function returns 1 if the container
+        // contains an element whose key is equivalent
+        // to hd, or returns zero otherwise.
+        while (!q.isEmpty()) {
+            QueueObj tmpNode = q.poll();
+            if (!topViewMap.containsKey(tmpNode.hd)) {
+                topViewMap.put(tmpNode.hd, tmpNode.node);
+            }
+ 
+            if (tmpNode.node.left != null) {
+                q.add(new QueueObj(tmpNode.node.left,
+                                   tmpNode.hd - 1));
+            }
+            if (tmpNode.node.right != null) {
+                q.add(new QueueObj(tmpNode.node.right,
+                                   tmpNode.hd + 1));
+            }
+        }
+        for (Entry<Integer, Node> entry :
+             topViewMap.entrySet()) {
+            System.out.print(entry.getValue().data);
+        }
+    }
+
+
+    public Node(int key)
+    {
+        data = key;
+        hd = Integer.MAX_VALUE;
+        left = right = null;
+    }
+}
+ 
+static void printBottomViewUtil(Node root, int curr, int hd,
+                                TreeMap<Integer, int[]> m)
+{
+     
+    // Base case
+    if (root == null)
+        return;
+ 
+    // If node for a particular
+    // horizontal distance is not
+    // present, add to the map.
+    if (!m.containsKey(hd))
+    {
+        m.put(hd, new int[]{ root.data, curr });
+    }
+     
+    // Compare height for already
+    // present node at similar horizontal
+    // distance
+    else
+    {
+        int[] p = m.get(hd);
+        if (p[1] <= curr)
+        {
+            p[1] = curr;
+            p[0] = root.data;
+        }
+        m.put(hd, p);
+    }
+ 
+    // Recur for left subtree
+    printBottomViewUtil(root.left, curr + 1,
+                        hd - 1, m);
+ 
+    // Recur for right subtree
+    printBottomViewUtil(root.right, curr + 1,
+                        hd + 1, m);
+}
+ 
+static void printBottomView(Node root)
+{
+ 
+    // Map to store Horizontal Distance,
+    // Height and Data.
+    TreeMap<Integer, int[]> m = new TreeMap<>();
+ 
+    printBottomViewUtil(root, 0, 0, m);
+ 
+    // Prints the values stored by printBottomViewUtil()
+    for(int val[] : m.values())
+    {
+        System.out.print(val[0] + " ");
+    }
+}
+
+
+    
+*/
      }
